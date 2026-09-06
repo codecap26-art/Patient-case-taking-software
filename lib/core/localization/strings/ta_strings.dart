@@ -1,0 +1,153 @@
+const Map<String, String> taStrings = {
+  // App General
+  'app_name': 'நோயாளி மருத்துவ பதிவு (Patient Case Taking)',
+  'tagline': 'உங்கள் தனிப்பட்ட மருத்துவ பதிவுகள் மற்றும் நல துணை',
+  'welcome_back': 'வணக்கம்,',
+  'loading': 'காத்திருக்கவும்...',
+  'cancel': 'ரத்துசெய்',
+  'save': 'மாற்றங்களை சேமிக்கவும்',
+  'submit': 'சமர்ப்பிக்கவும்',
+  'view_details': 'விவரங்களை காண்க',
+  'retry': 'மீண்டும் முயற்சிக்கவும்',
+  'see_all': 'அனைத்தையும் காண்க',
+  'close': 'மூடு',
+  'confirm': 'உறுதி செய்',
+  'allow': 'அனுமதி வழங்கு',
+  'deny': 'நிராகரி',
+  'revoke': 'அனுமதியை திரும்பப் பெறு',
+
+  // Splash & Auth
+  'splash_subtitle': 'AI-உதவி மருத்துவ வழக்கு பதிவு தளம்',
+  'login_title': 'நோயாளி உள்நுழைவு',
+  'login_subtitle': 'சரிபார்ப்பு OTP பெற உங்கள் பதிவு செய்யப்பட்ட மொபைல் எண்ணை உள்ளிடவும்',
+  'phone_number': 'மொபைல் எண்',
+  'phone_hint': '10 இலக்க மொபைல் எண்ணை உள்ளிடவும்',
+  'send_otp': 'OTP அனுப்பவும்',
+  'dont_have_account': 'கணக்கு இல்லையா?',
+  'register_now': 'இப்போது பதிவு செய்க',
+  'already_have_account': 'ஏற்கனவே பதிவு செய்துள்ளீர்களா?',
+  'login_here': 'உள்நுழைக',
+
+  // OTP Verification
+  'otp_verification': 'OTP சரிபார்ப்பு',
+  'otp_subtitle': 'இந்த எண்ணிற்கு அனுப்பப்பட்ட 6 இலக்க குறியீட்டை உள்ளிடவும்',
+  'enter_otp': 'OTP உள்ளிடவும்',
+  'verify_and_login': 'சரிபார்த்து உள்நுழையவும்',
+  'resend_otp': 'மீண்டும் OTP அனுப்பு',
+  'resend_in': 'மறுஅனுப்பல் நேரம்:',
+
+  // Registration
+  'register_title': 'நோயாளி பதிவு',
+  'register_subtitle': 'சிரமமில்லாத மருத்துவ அணுகலுக்கு உங்கள் சுயவிவரத்தை உருவாக்கவும்',
+  'full_name': 'முழு பெயர்',
+  'name_hint': 'எ.கா. ரமேஷ் குமார்',
+  'dob': 'பிறந்த தேதி',
+  'select_dob': 'பிறந்த தேதியை தேர்ந்தெடுக்கவும்',
+  'gender': 'பாலினம்',
+  'blood_group': 'இரத்த வகை',
+  'email': 'மின்னஞ்சல் முகவரி (விருப்பத்தேர்வு)',
+  'email_hint': 'name@example.com',
+  'emergency_contact': 'அவசர தொடர்பு எண்',
+  'emergency_hint': '10 இலக்க மொபைல் எண்',
+  'address': 'முகவரி',
+  'address_hint': 'உங்கள் முழு முகவரியை உள்ளிடவும்',
+  'complete_registration': 'பதிவை முடிக்கவும்',
+
+  // Navigation
+  'nav_home': 'முகப்பு',
+  'nav_records': 'பதிவுகள்',
+  'nav_prescriptions': 'மருந்துச்சீட்டு',
+  'nav_notifications': 'அறிவிப்புகள்',
+  'nav_profile': 'சுயவிவரம்',
+
+  // Dashboard
+  'quick_health_summary': 'உடல்நல முக்கிய சுருக்கம்',
+  'quick_actions': 'விரைவு நடவடிக்கைகள்',
+  'action_records': 'மருத்துவ பதிவுகள்',
+  'action_upload': 'ஆவணத்தை பதிவேற்றவும்',
+  'action_prescriptions': 'மருந்துச்சீட்டுகள்',
+  'action_consultations': 'ஆலோசனைகள்',
+  'action_my_qr': 'எனது QR குறியீடு',
+  'action_consent': 'அனுமதி & அணுகல்',
+  'upcoming_consultation': 'வரவிருக்கும் / அண்மை ஆலோசனை',
+  'active_prescription': 'செயலில் உள்ள மருந்துச்சீட்டு',
+  'recent_documents': 'சமீபத்திய ஆவணங்கள்',
+  'pending_consent_alert': 'மருத்துவமனை உங்கள் பதிவுகளை அணுக அனுமதி கோரியுள்ளது',
+
+  // Profile
+  'patient_profile': 'நோயாளி சுயவிவரம்',
+  'edit_profile': 'சுயவிவரத்தை திருத்தவும்',
+  'patient_id': 'நோயாளி எண்',
+  'personal_info': 'தனிப்பட்ட தகவல்',
+  'contact_info': 'தொடர்பு விவரங்கள்',
+  'medical_badge': 'சரிபார்க்கப்பட்ட நோயாளி',
+
+  // QR
+  'my_qr_title': 'எனது நோயாளி QR குறியீடு',
+  'qr_instruction': 'மருத்துவ ஆலோசனையை இணைக்க உங்கள் மருத்துவரிடம் இந்த QR குறியீட்டைக் காட்டவும்.',
+  'qr_security_note': 'பாதுகாப்பு குறிப்பு: இந்த QR குறியீட்டை ஸ்கேன் செய்வது தானாகவே மருத்துவ பதிவுகளுக்கு அணுகலை வழங்காது. உங்கள் வெளிப்படையான அனுமதி தேவை.',
+  'refresh_qr': 'QR குறியீட்டை புதுப்பிக்கவும்',
+  'qr_help_title': 'QR இணைப்பு எவ்வாறு செயல்படுகிறது',
+
+  // Documents
+  'medical_documents': 'மருத்துவ ஆவணங்கள்',
+  'upload_document': 'ஆவணம் பதிவேற்றவும்',
+  'upload_new': 'புதிய கோப்பை பதிவேற்றவும்',
+  'select_file_source': 'ஆவண மூலத்தைத் தேர்ந்தெடுக்கவும்',
+  'camera': 'புகைப்படம் எடுக்கவும்',
+  'gallery': 'கேலரியில் இருந்து தேர்வு செய்யவும்',
+  'pdf_picker': 'PDF ஆவணத்தைப் பதிவேற்றவும்',
+  'document_type': 'ஆவண வகை',
+  'hospital_clinic': 'மருத்துவமனை / கிளினிக் பெயர்',
+  'document_date': 'ஆவண தேதி',
+  'upload_progress': 'பதிவேற்றம் மற்றும் பகுப்பாய்வு நடக்கிறது...',
+  'extracted_info': 'AI-பிரித்தெடுக்கப்பட்ட மருத்துவ சுருக்கம்',
+  'extracted_disclaimer': 'குறிப்பு: மருத்துவர் மதிப்பாய்வுக்காக AI-ஆல் சுருக்கப்பட்டது. இது தானியங்கி நோயறிதல் அல்ல.',
+
+  // Medical History
+  'medical_history': 'மருத்துவ வரலாற்று காலவரிசை',
+  'filter_all': 'அனைத்து பதிவுகளும்',
+  'source_system': 'தற்போதைய அமைப்பு',
+  'source_uploaded': 'பதிவேற்றப்பட்ட ஆவணம்',
+  'source_external': 'வெளிப்புற மருத்துவமனை',
+
+  // Prescriptions
+  'my_prescriptions': 'எனது மருந்துச்சீட்டுகள்',
+  'active_tab': 'செயலில் உள்ளவை',
+  'past_tab': 'முந்தையவை',
+  'dosage_instructions': 'அளவு & வழிமுறைகள்',
+  'doctor_notes': 'மருத்துவரின் குறிப்புகள்',
+  'rx_disclaimer': 'சான்றளிக்கப்பட்ட மருத்துவரால் வழங்கப்பட்ட மருந்துச்சீட்டு.',
+  'download_rx': 'PDF பதிவிறக்கவும்',
+  'share_rx': 'பகிரவும்',
+
+  // Consultations
+  'consultation_history': 'ஆலோசனை வரலாறு',
+  'case_summary': 'வழக்கு சுருக்கம்',
+  'chief_complaints': 'முக்கிய அறிகுறிகள்',
+  'symptom_duration': 'கால அளவு',
+  'vitals': 'உடல் அறிகுறிகள்',
+  'clinical_notes': 'மருத்துவ குறிப்புகள்',
+  'linked_rx': 'இணைக்கப்பட்ட மருந்துச்சீட்டைப் பார்க்கவும்',
+
+  // Consent & Access
+  'consent_and_access': 'அனுமதி & அணுகல் கட்டுப்பாடு',
+  'pending_requests': 'நிலுவையில் உள்ள கோரிக்கைகள்',
+  'active_access': 'செயலில் உள்ள அனுமதிகள்',
+  'access_history': 'வரலாற்றுப் பதிவு',
+  'requested_scope': 'கோரப்பட்ட விவரங்கள்',
+  'purpose': 'அணுகலின் நோக்கம்',
+  'valid_until': 'செல்லுபடியாகும் தேதி',
+  'no_pending_requests': 'நிலுவையில் உள்ள கோரிக்கைகள் இல்லை',
+
+  // Settings
+  'settings': 'அமைப்புகள்',
+  'language': 'மொழி (Language)',
+  'privacy_policy': 'தனியுரிமைக் கொள்கை',
+  'notification_settings': 'அறிவிப்பு அமைப்புகள்',
+  'help_support': 'உதவி & ஆதரவு',
+  'about_app': 'செயலி பற்றி',
+  'logout': 'வெளியேறு',
+  'logout_confirm_title': 'வெளியேறுதல்',
+  'logout_confirm_msg': 'நிச்சயமாக நீங்கள் வெளியேற விரும்புகிறீர்களா?',
+};

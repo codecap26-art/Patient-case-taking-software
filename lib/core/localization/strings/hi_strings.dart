@@ -1,0 +1,153 @@
+const Map<String, String> hiStrings = {
+  // App General
+  'app_name': 'पेशेंट केस टेकिंग (Patient Case Taking)',
+  'tagline': 'आपका व्यक्तिगत क्लिनिकल रिकॉर्ड और स्वास्थ्य साथी',
+  'welcome_back': 'नमस्ते,',
+  'loading': 'कृपया प्रतीक्षा करें...',
+  'cancel': 'रद्द करें',
+  'save': 'परिवर्तन सहेजें',
+  'submit': 'जमा करें',
+  'view_details': 'विवरण देखें',
+  'retry': 'पुनः प्रयास करें',
+  'see_all': 'सभी देखें',
+  'close': 'बंद करें',
+  'confirm': 'पुष्टि करें',
+  'allow': 'अनुमति दें',
+  'deny': 'अस्वीकार करें',
+  'revoke': 'अनुमति रद्द करें',
+
+  // Splash & Auth
+  'splash_subtitle': 'एआई-सहायता प्राप्त केस टेकिंग प्लेटफॉर्म',
+  'login_title': 'मरीज़ लॉगिन',
+  'login_subtitle': 'सत्यापन ओटीपी प्राप्त करने के लिए अपना पंजीकृत मोबाइल नंबर दर्ज करें',
+  'phone_number': 'मोबाइल नंबर',
+  'phone_hint': '10 अंकों का मोबाइल नंबर दर्ज करें',
+  'send_otp': 'ओटीपी भेजें',
+  'dont_have_account': 'खाता नहीं है?',
+  'register_now': 'अभी पंजीकरण करें',
+  'already_have_account': 'पहले से पंजीकृत हैं?',
+  'login_here': 'लॉगिन करें',
+
+  // OTP Verification
+  'otp_verification': 'ओटीपी सत्यापन',
+  'otp_subtitle': 'इस नंबर पर भेजा गया 6-अंकों का कोड दर्ज करें',
+  'enter_otp': 'ओटीपी दर्ज करें',
+  'verify_and_login': 'सत्यापित करें और लॉगिन करें',
+  'resend_otp': 'ओटीपी पुनः भेजें',
+  'resend_in': 'पुनः भेजने का समय:',
+
+  // Registration
+  'register_title': 'मरीज़ पंजीकरण',
+  'register_subtitle': 'निर्बाध स्वास्थ्य सेवा के लिए अपना प्रोफ़ाइल बनाएं',
+  'full_name': 'पूरा नाम',
+  'name_hint': 'उदा. रमेश कुमार',
+  'dob': 'जन्म तिथि',
+  'select_dob': 'जन्म तिथि चुनें',
+  'gender': 'लिंग',
+  'blood_group': 'रक्त समूह',
+  'email': 'ईमेल पता (वैकल्पिक)',
+  'email_hint': 'name@example.com',
+  'emergency_contact': 'आपातकालीन संपर्क नंबर',
+  'emergency_hint': '10 अंकों का मोबाइल नंबर',
+  'address': 'पता',
+  'address_hint': 'अपना पूरा पता दर्ज करें',
+  'complete_registration': 'पंजीकरण पूरा करें',
+
+  // Navigation
+  'nav_home': 'होम',
+  'nav_records': 'रिकॉर्ड्स',
+  'nav_prescriptions': 'दवा की पर्ची',
+  'nav_notifications': 'सूचनाएं',
+  'nav_profile': 'प्रोफ़ाइल',
+
+  // Dashboard
+  'quick_health_summary': 'स्वास्थ्य विटल्स सारांश',
+  'quick_actions': 'त्वरित कार्य',
+  'action_records': 'मेडिकल रिकॉर्ड',
+  'action_upload': 'दस्तावेज़ अपलोड करें',
+  'action_prescriptions': 'दवा की पर्चियां',
+  'action_consultations': 'परामर्श इतिहास',
+  'action_my_qr': 'मेरा क्यूआर कोड',
+  'action_consent': 'सहमति और पहुंच',
+  'upcoming_consultation': 'आगामी / हालिया परामर्श',
+  'active_prescription': 'सक्रिय दवा की पर्ची',
+  'recent_documents': 'हाल के दस्तावेज़',
+  'pending_consent_alert': 'अस्पताल ने आपके रिकॉर्ड देखने की अनुमति मांगी है',
+
+  // Profile
+  'patient_profile': 'मरीज़ प्रोफ़ाइल',
+  'edit_profile': 'प्रोफ़ाइल संपादित करें',
+  'patient_id': 'मरीज़ आईडी',
+  'personal_info': 'व्यक्तिगत जानकारी',
+  'contact_info': 'संपर्क विवरण',
+  'medical_badge': 'सत्यापित मरीज़',
+
+  // QR
+  'my_qr_title': 'मेरा पेशेंट क्यूआर कोड',
+  'qr_instruction': 'परामर्श जोड़ने के लिए अपने अधिकृत डॉक्टर को यह क्यूआर कोड दिखाएं।',
+  'qr_security_note': 'सुरक्षा नोट: क्यूआर स्कैन करने से आपके निजी रिकॉर्ड तक सीधी पहुंच नहीं मिलती। आपको स्पष्ट सहमति देनी होगी।',
+  'refresh_qr': 'क्यूआर कोड रिफ्रेश करें',
+  'qr_help_title': 'क्यूआर लिंकिंग कैसे काम करती है',
+
+  // Documents
+  'medical_documents': 'मेडिकल दस्तावेज़',
+  'upload_document': 'दस्तावेज़ अपलोड करें',
+  'upload_new': 'नई फ़ाइल अपलोड करें',
+  'select_file_source': 'दस्तावेज़ स्रोत चुनें',
+  'camera': 'फोटो लें',
+  'gallery': 'गैलरी से चुनें',
+  'pdf_picker': 'पीडीएफ दस्तावेज़ अपलोड करें',
+  'document_type': 'दस्तावेज़ प्रकार',
+  'hospital_clinic': 'अस्पताल / क्लिनिक का नाम',
+  'document_date': 'दस्तावेज़ तिथि',
+  'upload_progress': 'अपलोड और विश्लेषण जारी है...',
+  'extracted_info': 'एआई द्वारा निकाला गया क्लिनिकल सारांश',
+  'extracted_disclaimer': 'नोट: डॉक्टर की समीक्षा और संदर्भ के लिए एआई द्वारा निकाला गया। यह स्वचालित निदान नहीं है।',
+
+  // Medical History
+  'medical_history': 'चिकित्सा इतिहास टाइमलाइन',
+  'filter_all': 'सभी रिकॉर्ड',
+  'source_system': 'वर्तमान प्रणाली',
+  'source_uploaded': 'अपलोड किया गया दस्तावेज़',
+  'source_external': 'बाहरी अस्पताल',
+
+  // Prescriptions
+  'my_prescriptions': 'मेरी दवा की पर्चियां',
+  'active_tab': 'सक्रिय',
+  'past_tab': 'पिछला',
+  'dosage_instructions': 'खुराक और निर्देश',
+  'doctor_notes': 'डॉक्टर के नोट्स',
+  'rx_disclaimer': 'प्रमाणित डॉक्टर द्वारा जारी और सत्यापित पर्ची।',
+  'download_rx': 'पीडीएफ डाउनलोड करें',
+  'share_rx': 'शेयर करें',
+
+  // Consultations
+  'consultation_history': 'परामर्श इतिहास',
+  'case_summary': 'केस सारांश',
+  'chief_complaints': 'मुख्य लक्षण',
+  'symptom_duration': 'अवधि',
+  'vitals': 'शारीरिक संकेत (Vitals)',
+  'clinical_notes': 'क्लिनिकल नोट्स',
+  'linked_rx': 'जुड़ी हुई पर्ची देखें',
+
+  // Consent & Access
+  'consent_and_access': 'सहमति और पहुंच नियंत्रण',
+  'pending_requests': 'लंबित अनुरोध',
+  'active_access': 'सक्रिय अनुमतियां',
+  'access_history': 'ऑडिट इतिहास',
+  'requested_scope': 'मांगी गई जानकारी',
+  'purpose': 'पहुंच का उद्देश्य',
+  'valid_until': 'मान्य तिथि',
+  'no_pending_requests': 'कोई लंबित अनुरोध नहीं है',
+
+  // Settings
+  'settings': 'सेटिंग्स',
+  'language': 'भाषा (Language)',
+  'privacy_policy': 'गोपनीयता नीति',
+  'notification_settings': 'सूचना प्राथमिकताएं',
+  'help_support': 'सहायता और समर्थन',
+  'about_app': 'ऐप के बारे में',
+  'logout': 'लॉग आउट',
+  'logout_confirm_title': 'लॉग आउट',
+  'logout_confirm_msg': 'क्या आप वाकई इस डिवाइस से लॉग आउट करना चाहते हैं?',
+};

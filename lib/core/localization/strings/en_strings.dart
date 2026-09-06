@@ -1,0 +1,153 @@
+const Map<String, String> enStrings = {
+  // App General
+  'app_name': 'Patient Case Taking',
+  'tagline': 'Your personal clinical records & health companion',
+  'welcome_back': 'Welcome Back,',
+  'loading': 'Please wait...',
+  'cancel': 'Cancel',
+  'save': 'Save Changes',
+  'submit': 'Submit',
+  'view_details': 'View Details',
+  'retry': 'Retry',
+  'see_all': 'See All',
+  'close': 'Close',
+  'confirm': 'Confirm',
+  'allow': 'Allow Access',
+  'deny': 'Deny',
+  'revoke': 'Revoke Access',
+
+  // Splash & Auth
+  'splash_subtitle': 'AI-Assisted Case Taking Platform',
+  'login_title': 'Patient Login',
+  'login_subtitle': 'Enter your registered mobile number to receive a verification OTP',
+  'phone_number': 'Mobile Number',
+  'phone_hint': 'Enter 10-digit mobile number',
+  'send_otp': 'Send OTP',
+  'dont_have_account': "Don't have an account?",
+  'register_now': 'Register Now',
+  'already_have_account': 'Already registered?',
+  'login_here': 'Log In',
+
+  // OTP Verification
+  'otp_verification': 'Verify OTP',
+  'otp_subtitle': 'Enter the 6-digit code sent to',
+  'enter_otp': 'Enter OTP',
+  'verify_and_login': 'Verify & Log In',
+  'resend_otp': 'Resend OTP',
+  'resend_in': 'Resend in',
+
+  // Registration
+  'register_title': 'Patient Registration',
+  'register_subtitle': 'Create your unified patient profile for seamless healthcare access',
+  'full_name': 'Full Name',
+  'name_hint': 'e.g. Ramesh Kumar',
+  'dob': 'Date of Birth',
+  'select_dob': 'Select Date of Birth',
+  'gender': 'Gender',
+  'blood_group': 'Blood Group',
+  'email': 'Email Address (Optional)',
+  'email_hint': 'name@example.com',
+  'emergency_contact': 'Emergency Contact Number',
+  'emergency_hint': '10-digit mobile number',
+  'address': 'Residential Address',
+  'address_hint': 'Enter your full address',
+  'complete_registration': 'Complete Registration',
+
+  // Navigation
+  'nav_home': 'Home',
+  'nav_records': 'Records',
+  'nav_prescriptions': 'Prescriptions',
+  'nav_notifications': 'Notifications',
+  'nav_profile': 'Profile',
+
+  // Dashboard
+  'quick_health_summary': 'Health Vitals Summary',
+  'quick_actions': 'Quick Actions',
+  'action_records': 'Medical Records',
+  'action_upload': 'Upload Document',
+  'action_prescriptions': 'Prescriptions',
+  'action_consultations': 'Consultations',
+  'action_my_qr': 'My QR Code',
+  'action_consent': 'Consent & Access',
+  'upcoming_consultation': 'Upcoming / Recent Consultation',
+  'active_prescription': 'Latest Active Prescription',
+  'recent_documents': 'Recent Documents',
+  'pending_consent_alert': 'Healthcare provider requested access to your records',
+
+  // Profile
+  'patient_profile': 'Patient Profile',
+  'edit_profile': 'Edit Profile',
+  'patient_id': 'Patient ID',
+  'personal_info': 'Personal Information',
+  'contact_info': 'Contact Details',
+  'medical_badge': 'Verified Patient',
+
+  // QR
+  'my_qr_title': 'My Patient QR Code',
+  'qr_instruction': 'Show this QR code to your authorized healthcare provider to link your consultation.',
+  'qr_security_note': 'Security Note: Scanning this QR code does NOT automatically grant access to your private medical records. You must grant explicit consent.',
+  'refresh_qr': 'Refresh QR Code',
+  'qr_help_title': 'How QR Linking Works',
+
+  // Documents
+  'medical_documents': 'Medical Documents',
+  'upload_document': 'Upload Document',
+  'upload_new': 'Upload New File',
+  'select_file_source': 'Select Document Source',
+  'camera': 'Take Photo',
+  'gallery': 'Choose from Gallery',
+  'pdf_picker': 'Upload PDF Document',
+  'document_type': 'Document Type',
+  'hospital_clinic': 'Hospital / Clinic Name',
+  'document_date': 'Document Date',
+  'upload_progress': 'Uploading & Processing...',
+  'extracted_info': 'AI-Extracted Clinical Summary',
+  'extracted_disclaimer': 'Note: Extracted by clinical AI parser for doctor review and patient reference. Not an automated diagnosis.',
+
+  // Medical History
+  'medical_history': 'Medical History Timeline',
+  'filter_all': 'All Records',
+  'source_system': 'Current System',
+  'source_uploaded': 'Uploaded Doc',
+  'source_external': 'External Hospital',
+
+  // Prescriptions
+  'my_prescriptions': 'My Prescriptions',
+  'active_tab': 'Active',
+  'past_tab': 'Completed / Past',
+  'dosage_instructions': 'Dosage & Instructions',
+  'doctor_notes': "Doctor's Notes",
+  'rx_disclaimer': 'Prescription issued and validated by certified medical doctor.',
+  'download_rx': 'Download PDF',
+  'share_rx': 'Share Prescription',
+
+  // Consultations
+  'consultation_history': 'Consultation History',
+  'case_summary': 'Case Summary',
+  'chief_complaints': 'Chief Complaints & Symptoms',
+  'symptom_duration': 'Duration',
+  'vitals': 'Recorded Vitals',
+  'clinical_notes': 'Clinical Case Notes',
+  'linked_rx': 'View Linked Prescription',
+
+  // Consent & Access
+  'consent_and_access': 'Consent & Access Control',
+  'pending_requests': 'Pending Requests',
+  'active_access': 'Active Permissions',
+  'access_history': 'Audit History',
+  'requested_scope': 'Requested Scope',
+  'purpose': 'Purpose of Access',
+  'valid_until': 'Valid Until',
+  'no_pending_requests': 'No pending access requests',
+
+  // Settings
+  'settings': 'Settings',
+  'language': 'Language / மொழி / भाषा',
+  'privacy_policy': 'Privacy Policy',
+  'notification_settings': 'Notification Preferences',
+  'help_support': 'Help & Support',
+  'about_app': 'About Patient Case Taking',
+  'logout': 'Log Out',
+  'logout_confirm_title': 'Log Out',
+  'logout_confirm_msg': 'Are you sure you want to log out from this device?',
+};
