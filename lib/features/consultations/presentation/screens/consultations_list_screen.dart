@@ -5,7 +5,7 @@ import '../../../../config/theme/app_colors.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/empty_state_view.dart';
-import '../state/consultation_notifier.dart';
+import '../../state/consultation_notifier.dart';
 
 class ConsultationsListScreen extends StatefulWidget {
   const ConsultationsListScreen({super.key});

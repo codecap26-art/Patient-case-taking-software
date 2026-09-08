@@ -5,7 +5,7 @@ import '../../../../config/theme/app_colors.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/data/mock_database.dart';
 import '../../../../shared/widgets/app_card.dart';
-import '../state/consultation_notifier.dart';
+import '../../state/consultation_notifier.dart';
 
 class ConsultationDetailScreen extends StatelessWidget {
   final String consultationId;

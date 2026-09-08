@@ -31,7 +31,10 @@ class AuthServiceImpl implements AuthService {
     try {
       final res = await apiClient.post(
         ApiEndpoints.sendOtp,
-        data: {'mobile_number': mobileNumber},
+        data: {
+          'phone': mobileNumber,
+          'mobile_number': mobileNumber,
+        },
       );
       return res.statusCode == 200;
     } catch (e) {
@@ -58,20 +61,30 @@ class AuthServiceImpl implements AuthService {
     try {
       final res = await apiClient.post(
         ApiEndpoints.verifyOtp,
-        data: {'mobile_number': mobileNumber, 'otp': otp},
+        data: {
+          'phone': mobileNumber,
+          'mobile_number': mobileNumber,
+          'otp': otp,
+        },
       );
 
       final data = res.data as Map<String, dynamic>;
       final token = data['access_token'] as String;
       final refreshToken = data['refresh_token'] as String?;
-      final patientJson = data['patient'] as Map<String, dynamic>;
-
+      
       await tokenStorage.saveTokens(
         accessToken: token,
         refreshToken: refreshToken,
       );
-      await tokenStorage.savePatientJson(jsonEncode(patientJson));
 
+      Map<String, dynamic>? patientJson = data['patient'] as Map<String, dynamic>?;
+      if (patientJson == null) {
+        // Fetch patient profile directly
+        final profileRes = await apiClient.get(ApiEndpoints.profile);
+        patientJson = profileRes.data as Map<String, dynamic>;
+      }
+
+      await tokenStorage.savePatientJson(jsonEncode(patientJson));
       return PatientModel.fromJson(patientJson);
     } catch (e) {
       if (e is AuthException) rethrow;
@@ -96,16 +109,31 @@ class AuthServiceImpl implements AuthService {
     }
 
     try {
+      final names = patient.name.trim().split(' ');
+      final firstName = names.isNotEmpty ? names.first : 'Patient';
+      final lastName = names.length > 1 ? names.sublist(1).join(' ') : 'User';
+
       final res = await apiClient.post(
         ApiEndpoints.register,
         data: {
-          ...patient.toJson(),
+          'phone': patient.phone,
+          'first_name': firstName,
+          'last_name': lastName,
+          'date_of_birth': patient.dateOfBirth,
+          'gender': patient.gender,
+          'blood_group': patient.bloodGroup,
+          'emergency_contact': patient.emergencyContact,
+          'address': patient.address,
+          'email': patient.email,
+          'allergies': patient.allergies,
+          'chronic_conditions': patient.chronicConditions,
           'otp': otp,
+          'password': 'Patient@123',
         },
       );
       final data = res.data as Map<String, dynamic>;
       final token = data['access_token'] as String;
-      final patientJson = data['patient'] as Map<String, dynamic>;
+      final patientJson = (data['patient'] as Map<String, dynamic>?) ?? data;
 
       await tokenStorage.saveTokens(accessToken: token);
       await tokenStorage.savePatientJson(jsonEncode(patientJson));
@@ -139,3 +167,4 @@ class AuthServiceImpl implements AuthService {
     return null;
   }
 }
+

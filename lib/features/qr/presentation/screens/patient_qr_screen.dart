@@ -7,7 +7,6 @@ import '../../../../config/theme/app_colors.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/data/mock_database.dart';
 import '../../../../shared/widgets/app_card.dart';
-import '../../../../shared/widgets/custom_button.dart';
 import '../../../auth/state/auth_notifier.dart';
 
 class PatientQrScreen extends StatefulWidget {

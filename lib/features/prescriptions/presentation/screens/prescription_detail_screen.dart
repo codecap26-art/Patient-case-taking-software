@@ -6,7 +6,7 @@ import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/data/mock_database.dart';
 import '../../../../shared/models/prescription_model.dart';
 import '../../../../shared/widgets/app_card.dart';
-import '../state/prescription_notifier.dart';
+import '../../state/prescription_notifier.dart';
 
 class PrescriptionDetailScreen extends StatelessWidget {
   final String prescriptionId;

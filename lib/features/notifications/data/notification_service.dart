@@ -38,7 +38,7 @@ class NotificationServiceImpl implements NotificationService {
       return true;
     }
 
-    final res = await apiClient.post(ApiEndpoints.markNotificationRead(id));
+    final res = await apiClient.put(ApiEndpoints.markNotificationRead(id));
     return res.statusCode == 200;
   }
 
@@ -52,7 +52,7 @@ class NotificationServiceImpl implements NotificationService {
       return true;
     }
 
-    final res = await apiClient.post(ApiEndpoints.markAllNotificationsRead);
+    final res = await apiClient.put(ApiEndpoints.markAllNotificationsRead);
     return res.statusCode == 200;
   }
 }

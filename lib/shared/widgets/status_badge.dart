@@ -48,6 +48,13 @@ class StatusBadge extends StatelessWidget {
           backgroundColor: AppColors.successContainer,
           icon: Icons.check_circle_outline,
         );
+      case DocumentStatus.failed:
+        return const StatusBadge(
+          label: 'Failed',
+          textColor: AppColors.error,
+          backgroundColor: AppColors.errorContainer,
+          icon: Icons.error_outline,
+        );
     }
   }
 

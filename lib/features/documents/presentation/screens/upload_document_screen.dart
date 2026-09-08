@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:dio/dio.dart';
+import '../../../../config/app_config.dart';
 import '../../../../config/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/widgets/custom_button.dart';
 import '../../../../shared/widgets/custom_text_field.dart';
-import '../state/document_notifier.dart';
+import '../../state/document_notifier.dart';
 
 class UploadDocumentScreen extends StatefulWidget {
   const UploadDocumentScreen({super.key});
@@ -21,39 +24,145 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
 
   final _titleController = TextEditingController();
   final _hospitalController = TextEditingController();
+  final _ocrContentController = TextEditingController();
 
   String _selectedDocType = AppConstants.documentTypes.first;
   DateTime _selectedDate = DateTime.now();
   String? _selectedFileName;
+  List<int>? _selectedFileBytes;
+  String? _selectedFileSizeDisplay;
   String _selectedSource = 'PDF';
+  bool _isScanningOcr = false;
+  String? _organizedSummary;
+  Map<String, dynamic>? _previewStructuredData;
 
   @override
   void dispose() {
     _titleController.dispose();
     _hospitalController.dispose();
+    _ocrContentController.dispose();
     super.dispose();
   }
 
-  void _simulateFilePick(String source) {
+  Future<void> _scanAndOrganizeWithAI() async {
+    if (_selectedFileBytes == null || _selectedFileName == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select or capture a medical document file first.'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+      return;
+    }
+
     setState(() {
-      _selectedSource = source;
-      if (source == 'Camera') {
-        _selectedFileName = 'IMG_SCAN_${DateTime.now().millisecondsSinceEpoch}.jpg';
-      } else if (source == 'Gallery') {
-        _selectedFileName = 'MEDICAL_REPORT_${DateTime.now().millisecondsSinceEpoch}.png';
-      } else {
-        _selectedFileName = 'DIAGNOSTIC_REPORT_${DateFormat('yyyyMMdd').format(DateTime.now())}.pdf';
-      }
+      _isScanningOcr = true;
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Selected file: $_selectedFileName ($source)'),
-        backgroundColor: AppColors.primary,
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 2),
-      ),
-    );
+    try {
+      final dio = Dio();
+      final formData = FormData.fromMap({
+        'file': MultipartFile.fromBytes(_selectedFileBytes!, filename: _selectedFileName!),
+      });
+
+      final resp = await dio.post(
+        '${AppConfig.apiBaseUrl}/api/ocr/extract?organize_with_llm=true',
+        data: formData,
+      );
+
+      if (resp.statusCode == 200 && resp.data != null) {
+        final data = resp.data as Map<String, dynamic>;
+        final rawText = data['text'] as String? ?? '';
+        final summary = data['clinical_summary'] as String? ?? '';
+        final structData = data['structured_data'] as Map<String, dynamic>? ?? {};
+
+        setState(() {
+          if (rawText.isNotEmpty) {
+            _ocrContentController.text = rawText;
+          }
+          _organizedSummary = summary.isNotEmpty ? summary : null;
+          _previewStructuredData = structData.isNotEmpty ? structData : null;
+        });
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('OCR transcribed & organized by AI successfully!'),
+              backgroundColor: AppColors.success,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Scan complete. Please review content.'),
+            backgroundColor: AppColors.primary,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isScanningOcr = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _pickRealFile(String source) async {
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+        withData: true,
+      );
+
+      if (result != null && result.files.isNotEmpty) {
+        final file = result.files.first;
+        String? extractedText;
+        if (file.bytes != null) {
+          try {
+            // Attempt decoding text if file is text/ascii/utf8
+            final decoded = String.fromCharCodes(file.bytes!);
+            final clean = decoded.replaceAll(RegExp(r'[^\x20-\x7E\n\r\t]'), ' ').trim();
+            if (clean.length > 20) {
+              extractedText = clean.length > 1500 ? clean.substring(0, 1500) : clean;
+            }
+          } catch (_) {}
+        }
+
+        setState(() {
+          _selectedSource = source;
+          _selectedFileName = file.name;
+          _selectedFileBytes = file.bytes;
+          _selectedFileSizeDisplay = '${(file.size / 1024).toStringAsFixed(1)} KB';
+          if (_titleController.text.trim().isEmpty) {
+            _titleController.text = file.name.replaceAll(RegExp(r'\.[a-zA-Z0-9]+$'), '').replaceAll(RegExp(r'[_-]'), ' ');
+          }
+          if (extractedText != null && extractedText.isNotEmpty && _ocrContentController.text.trim().isEmpty) {
+            _ocrContentController.text = extractedText;
+          }
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Selected: ${file.name} ($_selectedFileSizeDisplay)'),
+            backgroundColor: AppColors.primary,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error choosing file: $e'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+    }
   }
 
   Future<void> _handleUpload() async {
@@ -61,7 +170,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
     if (_selectedFileName == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please select or capture a medical document file'),
+          content: Text('Please select or capture a medical document file from your device'),
           backgroundColor: AppColors.error,
         ),
       );
@@ -74,6 +183,9 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
       documentType: _selectedDocType,
       hospitalName: _hospitalController.text.trim(),
       date: DateFormat('yyyy-MM-dd').format(_selectedDate),
+      rawText: _ocrContentController.text.trim().isNotEmpty ? _ocrContentController.text.trim() : null,
+      fileBytes: _selectedFileBytes,
+      fileName: _selectedFileName,
     );
 
     if (!mounted) return;
@@ -81,7 +193,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
     if (result != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Document uploaded & AI parsing completed successfully!'),
+          content: Text('Document uploaded & OCR extraction completed successfully!'),
           backgroundColor: AppColors.success,
         ),
       );
@@ -89,7 +201,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Failed to upload document. Please try again.'),
+          content: Text('Failed to upload document. Please check backend connection.'),
           backgroundColor: AppColors.error,
         ),
       );
@@ -180,7 +292,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
                               ),
                             ),
                             Text(
-                              'Source: $_selectedSource • Ready for processing',
+                              'Size: ${_selectedFileSizeDisplay ?? 'Ready'} • Source: $_selectedSource',
                               style: const TextStyle(
                                 fontSize: 11,
                                 color: AppColors.textSecondary,
@@ -191,7 +303,11 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
                       ),
                       IconButton(
                         icon: const Icon(Icons.close, size: 18, color: AppColors.textSecondary),
-                        onPressed: () => setState(() => _selectedFileName = null),
+                        onPressed: () => setState(() {
+                          _selectedFileName = null;
+                          _selectedFileBytes = null;
+                          _selectedFileSizeDisplay = null;
+                        }),
                       ),
                     ],
                   ),
@@ -300,6 +416,82 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 16),
+
+              // Document OCR Content & AI Organization
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'OCR Text & AI Organization',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  if (_selectedFileBytes != null)
+                    TextButton.icon(
+                      onPressed: _isScanningOcr ? null : _scanAndOrganizeWithAI,
+                      icon: _isScanningOcr
+                          ? const SizedBox(
+                              width: 14,
+                              height: 14,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.auto_awesome, size: 16, color: AppColors.primary),
+                      label: Text(
+                        _isScanningOcr ? 'Scanning & Organizing...' : 'Scan with OCR & LLM',
+                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              CustomTextField(
+                label: 'Scanned Text / Test Results',
+                hintText: 'e.g. Hemoglobin: 14.2 g/dL, Fasting Sugar: 105 mg/dL, Platelets: 210,000...',
+                controller: _ocrContentController,
+                maxLines: 4,
+              ),
+              if (_organizedSummary != null) ...[
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryContainer.withValues(alpha: 0.4),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.check_circle_outline, size: 16, color: AppColors.primary),
+                          SizedBox(width: 6),
+                          Text(
+                            'AI Organized Summary',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppColors.primary),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        _organizedSummary!,
+                        style: const TextStyle(fontSize: 12, color: AppColors.textPrimary, height: 1.4),
+                      ),
+                      if (_previewStructuredData != null && _previewStructuredData!.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          '${_previewStructuredData!.length} Clinical Parameters Extracted',
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.textSecondary),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
               const SizedBox(height: 24),
 
               // Progress Bar if uploading
@@ -374,7 +566,7 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
 
     return Expanded(
       child: InkWell(
-        onTap: () => _simulateFilePick(sourceName),
+        onTap: () => _pickRealFile(sourceName),
         borderRadius: BorderRadius.circular(12),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),

@@ -7,7 +7,7 @@ import '../../../../shared/models/medical_record_model.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/empty_state_view.dart';
 import '../../../../shared/widgets/status_badge.dart';
-import '../state/history_notifier.dart';
+import '../../state/history_notifier.dart';
 
 class MedicalHistoryScreen extends StatefulWidget {
   const MedicalHistoryScreen({super.key});

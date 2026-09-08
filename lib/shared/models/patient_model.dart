@@ -62,9 +62,19 @@ class PatientModel {
   }
 
   factory PatientModel.fromJson(Map<String, dynamic> json) {
+    String computedName = json['name'] as String? ?? '';
+    if (computedName.isEmpty) {
+      final firstName = json['first_name'] as String? ?? '';
+      final lastName = json['last_name'] as String? ?? '';
+      computedName = '$firstName $lastName'.trim();
+      if (computedName.isEmpty) {
+        computedName = 'Patient';
+      }
+    }
+
     return PatientModel(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
+      id: json['id'] as String? ?? json['patient_identifier'] as String? ?? '',
+      name: computedName,
       phone: json['phone'] as String? ?? '',
       email: json['email'] as String?,
       dateOfBirth: json['date_of_birth'] as String? ?? '',
@@ -72,7 +82,11 @@ class PatientModel {
       bloodGroup: json['blood_group'] as String? ?? 'O+',
       emergencyContact: json['emergency_contact'] as String? ?? '',
       address: json['address'] as String? ?? '',
-      qrCodeToken: json['qr_code_token'] as String? ?? json['id'] as String? ?? '',
+      qrCodeToken: json['qr_code_token'] as String? ??
+          json['qr_payload'] as String? ??
+          json['patient_identifier'] as String? ??
+          json['id'] as String? ??
+          '',
       avatarUrl: json['avatar_url'] as String?,
       allergies: (json['allergies'] as List<dynamic>?)
               ?.map((e) => e.toString())

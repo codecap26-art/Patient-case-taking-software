@@ -4,10 +4,9 @@ import 'package:provider/provider.dart';
 import '../../../../config/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/localization/app_localizations.dart';
-import '../../../../shared/models/patient_model.dart';
 import '../../../../shared/widgets/custom_button.dart';
 import '../../../../shared/widgets/custom_text_field.dart';
-import '../state/profile_notifier.dart';
+import '../../state/profile_notifier.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

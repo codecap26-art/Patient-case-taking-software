@@ -117,12 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(10),
                   ],
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 14),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        const Text(
                           '+91',
                           style: TextStyle(
                             fontSize: 15,
@@ -130,8 +130,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: AppColors.textPrimary,
                           ),
                         ),
-                        SizedBox(width: 8),
-                        VerticalDivider(width: 1, thickness: 1, color: AppColors.outline),
+                        const SizedBox(width: 8),
+                        Container(width: 1, height: 20, color: AppColors.outline),
                       ],
                     ),
                   ),

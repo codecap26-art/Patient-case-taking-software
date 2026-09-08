@@ -8,7 +8,7 @@ import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/custom_button.dart';
 import '../../../../shared/widgets/empty_state_view.dart';
 import '../../../../shared/widgets/status_badge.dart';
-import '../state/consent_notifier.dart';
+import '../../state/consent_notifier.dart';
 
 class ConsentAccessScreen extends StatefulWidget {
   const ConsentAccessScreen({super.key});
@@ -38,7 +38,6 @@ class _ConsentAccessScreenState extends State<ConsentAccessScreen>
 
   void _handleRespond(ConsentRequestModel req, bool allow) async {
     final consentNotifier = context.read<ConsentNotifier>();
-    final actionName = allow ? 'allow' : 'deny';
 
     final confirmed = await showDialog<bool>(
       context: context,

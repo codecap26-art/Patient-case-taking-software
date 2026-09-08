@@ -6,7 +6,7 @@ import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/models/notification_model.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/empty_state_view.dart';
-import '../state/notification_notifier.dart';
+import '../../state/notification_notifier.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -35,7 +35,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       case NotificationCategory.consent:
         return Icons.shield_outlined;
       case NotificationCategory.system:
-      default:
         return Icons.info_outline;
     }
   }
@@ -51,7 +50,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       case NotificationCategory.consent:
         return AppColors.warning;
       case NotificationCategory.system:
-      default:
         return AppColors.textTertiary;
     }
   }

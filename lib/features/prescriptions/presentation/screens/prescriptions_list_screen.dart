@@ -6,7 +6,7 @@ import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/models/prescription_model.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/empty_state_view.dart';
-import '../state/prescription_notifier.dart';
+import '../../state/prescription_notifier.dart';
 
 class PrescriptionsListScreen extends StatefulWidget {
   const PrescriptionsListScreen({super.key});

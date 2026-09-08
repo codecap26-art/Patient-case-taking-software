@@ -8,7 +8,7 @@ import '../../../../shared/data/mock_database.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/status_badge.dart';
 import '../../../auth/state/auth_notifier.dart';
-import '../state/home_notifier.dart';
+import '../../state/home_notifier.dart';
 import '../widgets/health_summary_card.dart';
 import '../widgets/quick_actions_grid.dart';
 
@@ -435,7 +435,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                 ),
                 const SizedBox(height: 8),
                 ListView.separated(
-                  physics: const NeverScrollableScrollParametric(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: recentDocs.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 10),

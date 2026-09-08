@@ -7,7 +7,7 @@ import '../../../../core/routing/route_names.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/empty_state_view.dart';
 import '../../../../shared/widgets/status_badge.dart';
-import '../state/document_notifier.dart';
+import '../../state/document_notifier.dart';
 
 class DocumentsListScreen extends StatefulWidget {
   const DocumentsListScreen({super.key});

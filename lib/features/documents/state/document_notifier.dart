@@ -55,14 +55,17 @@ class DocumentNotifier extends ChangeNotifier {
     required String documentType,
     required String hospitalName,
     required String date,
+    String? rawText,
     File? file,
+    List<int>? fileBytes,
+    String? fileName,
   }) async {
     _uploadStage = DocumentUploadStage.uploading;
     _uploadProgress = 0.3;
     notifyListeners();
 
     try {
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 300));
       _uploadProgress = 0.7;
       _uploadStage = DocumentUploadStage.processing;
       notifyListeners();
@@ -72,7 +75,10 @@ class DocumentNotifier extends ChangeNotifier {
         documentType: documentType,
         hospitalName: hospitalName,
         date: date,
+        rawText: rawText,
         file: file,
+        fileBytes: fileBytes,
+        fileName: fileName,
       );
 
       _uploadProgress = 1.0;

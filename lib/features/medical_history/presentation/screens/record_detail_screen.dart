@@ -6,7 +6,7 @@ import '../../../../core/localization/app_localizations.dart';
 import '../../../../shared/data/mock_database.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/status_badge.dart';
-import '../state/history_notifier.dart';
+import '../../state/history_notifier.dart';
 
 class RecordDetailScreen extends StatelessWidget {
   final String recordId;
