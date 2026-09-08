@@ -5,14 +5,16 @@ from app.db.models.clinical_case import ClinicalCaseStatus
 
 
 class ClinicalCaseCreate(BaseModel):
-    consultation_id: str
+    consultation_id: Optional[str] = None
     patient_id: str
-    symptoms: Optional[List[str]] = []
+    patient_name: Optional[str] = None
+    symptoms: Optional[List[Any]] = []
     complaints: Optional[str] = None
+    chief_complaint: Optional[str] = None
     duration: Optional[str] = None
-    medical_history: Optional[List[str]] = []
-    allergies: Optional[List[str]] = []
-    medications: Optional[List[str]] = []
+    medical_history: Optional[List[Any]] = []
+    allergies: Optional[List[Any]] = []
+    medications: Optional[List[Any]] = []
     family_history: Optional[str] = None
     examination: Optional[Dict[str, Any]] = {}
     extracted_data: Optional[Dict[str, Any]] = {}
