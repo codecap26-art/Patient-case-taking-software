@@ -118,16 +118,25 @@ class AuthService:
 
     @staticmethod
     def login(db: Session, req: LoginRequest) -> TokenResponse:
-        user = db.scalar(select(User).where(User.phone == req.phone))
+        ident = req.phone.strip()
+        user = db.scalar(
+            select(User)
+            .outerjoin(Doctor, Doctor.user_id == User.id)
+            .where(
+                (User.phone == ident) |
+                (User.email.ilike(ident)) |
+                (Doctor.doctor_identifier == ident)
+            )
+        )
         if not user:
-            raise UnauthorizedException("No account found with this phone number.")
+            raise UnauthorizedException("No account found with this email, phone, or Doctor ID.")
 
         if not user.is_active:
             raise UnauthorizedException("Account is disabled. Contact support.")
 
         # Authenticate via OTP or Password
         if req.otp:
-            if not AuthService.verify_otp_code(req.phone, req.otp):
+            if not AuthService.verify_otp_code(user.phone, req.otp):
                 raise UnauthorizedException("Invalid OTP code.")
         elif req.password:
             if not verify_password(req.password, user.password_hash):

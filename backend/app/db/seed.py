@@ -88,6 +88,28 @@ def seed_database():
         db.add(doctor)
         db.flush()
 
+        # 2b. MediCare Doctor (Dr. Rajesh Sharma - doctor@medicare.com)
+        medicare_user = User(
+            email="doctor@medicare.com",
+            phone="9876543201",
+            password_hash=get_password_hash("doctor123"),
+            role=UserRole.DOCTOR,
+            is_active=True,
+        )
+        db.add(medicare_user)
+        db.flush()
+
+        medicare_doctor = Doctor(
+            user_id=medicare_user.id,
+            doctor_identifier="DOC-MED-101",
+            name="Dr. Rajesh Sharma",
+            specialization="General Cardiology & Internal Medicine",
+            registration_number="MCI-MED-2024-101",
+            hospital_id=hosp_a.id,
+        )
+        db.add(medicare_doctor)
+        db.flush()
+
         # 3. Patient 1 User (Ramesh Kumar - Primary test patient)
         p1_user = User(
             email="ramesh.kumar@healthmail.com",
